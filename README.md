@@ -82,3 +82,23 @@ SBSI가 처리하지 않은 흩어진 객체를 한 번의 추론으로 처리�
 
 - 단일 백본(YOLOv8s)과 단일 데이터셋(VisDrone)에서 평가했습니다.
 - Patch Packing보다 고해상도 추론이 약 7ms 느립니다.
+
+## 코드
+
+| 경로 | 내용 |
+|---|---|
+| [src/hahi_benchmark.py](src/hahi_benchmark.py) | 논문 표(정확도·VRAM·속도)를 산출한 최종 코드. UC(2×2), DAHI, Packing, DAHI+Packing, SBSI+Packing, SBSI+DCRP 6가지를 같은 조건에서 COCO API로 평가하고 그래프 생성 |
+| [results/benchmark_log.txt](results/benchmark_log.txt) | 위 코드의 실행 로그(1,294장, ALL/HR/LR별 지표) |
+| [results/figure_1.png](results/figure_1.png), [figure_2.png](results/figure_2.png) | 정확도 비교, VRAM·속도 비교 그래프 |
+| [notebooks/detect_experiments.ipynb](notebooks/detect_experiments.ipynb) | 22단계 실험 이력(초기 벤치마크 → 공식 COCO 평가 → 최종 구성). 이미지 출력은 제거, 텍스트 결과는 보존 |
+
+### 실행
+
+```powershell
+pip install ultralytics pycocotools opencv-python matplotlib tqdm
+$env:HAHI_MODEL = 'model/best_small.pt'   # VisDrone으로 학습한 YOLOv8s 가중치
+$env:HAHI_DATASET = 'data/valid'          # images/, labels/(YOLO 형식) 포함
+python src/hahi_benchmark.py
+```
+
+학습 가중치와 데이터셋은 용량·라이선스 때문에 포함하지 않았습니다. VisDrone 데이터셋은 공식 배포처에서 받을 수 있습니다.
