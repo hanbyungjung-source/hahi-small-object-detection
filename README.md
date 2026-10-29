@@ -1,7 +1,7 @@
 # HAHI — 밀도와 동적 패킹을 활용한 고해상도 영상 소형 객체 탐지
 
 **Efficient High-Resolution Object Detection via Hybrid-Aided Hyper Inference: Utilizing Density and Dynamic Packing**
-한병정, 한양대학교 공학대학원 컴퓨터공학 석사학위논문 (2026)
+컴퓨터공학 석사학위논문 (2026)
 
 ## 문제
 
